@@ -1,0 +1,72 @@
+<navbar></navbar>
+<!-- <header> -->
+  <!-- <hero></hero> -->
+<!-- </header> -->
+<main>
+  <div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2">
+				<div class="list-group">
+					<a
+						ng-repeat="category in $ctrl.categories" 
+						class="list-group-item" 
+						ng-class="{active: $ctrl.category===category}"
+						ng-click="$ctrl.selectCategory(category)"
+						ng-dblclick="$ctrl.onCatDblClick(category)"						
+						style="cursor:pointer">			            
+    				<h4 class="list-group-item-heading" ng-hide="category.__edit===true">{{category.name}}</h4>
+    				<input type="text" class="form-control" id="" placeholder="Category Name" ng-show="category.__edit===true" ng-model="category.name" ng-blur="category.__edit=false">
+    				<!-- <p class="list-group-item-text">{{step._description}}</p>						 -->
+						<!-- <button type="button" style="position:absolute;right: 10px;bottom:10px;" class="btn btn-danger btn-xs" ng-click="$ctrl.deleteStep(step)">Delete</button> --> 								
+					</a>
+  				<a class="list-group-item" ng-click="$ctrl.addCategory()" style="cursor:pointer;background:green;">
+  					<h4 class="list-group-item-heading">New Category</h4>
+					</a>					
+				</div>				
+			</div>
+
+			<div class="col-lg-2">
+				<div class="list-group">
+					<a
+						ng-repeat="item in $ctrl.category.items" 
+						class="list-group-item" 
+						ng-class="{active: $ctrl.item===item}"
+						ng-click="$ctrl.selectItem(item)"
+						style="cursor:pointer"
+						>			            
+    				<h4 class="list-group-item-heading">{{item.name}}</h4>
+  				</a>
+  				<a class="list-group-item" ng-click="$ctrl.addItem()" style="cursor:pointer;background:green;" ng-hide="!$ctrl.category">
+  					<h4 class="list-group-item-heading">New Item</h4>
+					</a>					  				
+				</div>				
+			</div>
+			
+			<div class="col-lg-8">
+				<div class="row" ng-show="$ctrl.item">
+					<div class="col-lg-12">
+	          <div class="input-group input-group-md">
+	            <span class="input-group-addon">Name</span>
+					  	<input required type="text" ng-model="$ctrl.item.name" name="" ng-class="{'error': $ctrl.item.name.$invalid}" class="form-control" placeholder="Item Name..." ng-change="$ctrl.itemChanged($ctrl.item)">
+					  </div>
+				  	<!--<small id="" class="form-text text-muted">some text...</small>-->
+					</div>
+					<div class="col-lg-12">
+	          <div class="input-group input-group-md">
+	            <span class="input-group-addon">Price</span>
+					  	<input required type="number" ng-model="$ctrl.item.price" name="" ng-class="{'error': $ctrl.item.price.$invalid}" class="form-control" placeholder="Item Name..." ng-change="$ctrl.itemChanged($ctrl.item)">
+					  </div>
+					</div>
+					<div class="col-lg-12">
+						<label class="custom-control custom-checkbox">
+	  					<input type="checkbox" class="custom-control-input" ng-model="$ctrl.item.in_stock" ng-change="$ctrl.itemChanged($ctrl.item)">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">In Stock</span>
+						</label>					  					    	
+					</div>
+				</div>
+			</div>
+
+    </div>
+  </div>
+</main>
