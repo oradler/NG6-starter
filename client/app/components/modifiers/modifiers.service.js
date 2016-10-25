@@ -1,12 +1,10 @@
-//import AppDataService from '../app.data.service';
-
-var categoriesService = function ($q, DataService) {
+var modifiersService = function ($q, DataService) {
 	"ngInject";
 
-	var categories;
+	var modifierGroups;
 
 	return {
-		getCategories: function(){
+		getModifierGroups: function(){
 			if (!categories) {
 				return DataService.getCategories()
 					.then(function(categories_){

@@ -15,7 +15,7 @@ let categoriesModule = angular.module('categories', [
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('categories', {
+    .state('items', {
       url: '/',
       component: 'categories',
       resolve: {

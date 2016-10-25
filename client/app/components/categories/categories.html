@@ -16,12 +16,12 @@
 						style="cursor:pointer">			            
     				<h4 class="list-group-item-heading" ng-hide="category.__edit===true">{{category.name}}</h4>
     				<input type="text" class="form-control" id="" placeholder="Category Name" ng-show="category.__edit===true" ng-model="category.name" ng-blur="category.__edit=false">
-    				<!-- <p class="list-group-item-text">{{step._description}}</p>						 -->
-						<!-- <button type="button" style="position:absolute;right: 10px;bottom:10px;" class="btn btn-danger btn-xs" ng-click="$ctrl.deleteStep(step)">Delete</button> --> 								
+						<button type="button" style="position:absolute;right: 10px;bottom:10px;" class="btn btn-danger btn-xs" ng-click="$ctrl.deleteCategory(category)"><span class="glyphicon glyphicon-remove"></span></button>
 					</a>
   				<a class="list-group-item" ng-click="$ctrl.addCategory()" style="cursor:pointer;background:green;">
-  					<h4 class="list-group-item-heading">New Category</h4>
-					</a>					
+  					<span class="glyphicon glyphicon-plus"></span>
+  					<!-- <h4 class="list-group-item-heading">New Category</h4> -->
+					</a>
 				</div>				
 			</div>
 
@@ -35,9 +35,11 @@
 						style="cursor:pointer"
 						>			            
     				<h4 class="list-group-item-heading">{{item.name}}</h4>
+						<button type="button" style="position:absolute;right: 10px;bottom:10px;" class="btn btn-danger btn-xs" ng-click="$ctrl.deleteItem(item)"><span class="glyphicon glyphicon-remove"></span></button>    				
   				</a>
   				<a class="list-group-item" ng-click="$ctrl.addItem()" style="cursor:pointer;background:green;" ng-hide="!$ctrl.category">
-  					<h4 class="list-group-item-heading">New Item</h4>
+  					<!-- <h4 class="list-group-item-heading">New Item</h4> -->
+  					<span class="glyphicon glyphicon-plus"></span>
 					</a>					  				
 				</div>				
 			</div>
