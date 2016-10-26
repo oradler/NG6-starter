@@ -1,67 +1,61 @@
-// class CategoriesController {
-//   constructor() {
-//     //this.name = 'home';
-//   }
-// }
-
-
-var CategoriesController = function(categoriesService) {
+var ModifiersController = function(modifiersService) {
 	"ngInject";
 
 	var ctrl = this;
 
 	this.$onChanges = function(changes) {
-		if (changes.categories) {
+		// if (changes.categories) {
 			//debugger;
 			//this.categories = angular.copy(this.categories);
-		}
+		// }
 	}
 
 	this.$onInit = function() {
+		//console.log(this.modifiersGroup);		
 		//this.name = 'categorieszzz';
 		// this.selectedCategory;		
 	}		
 
-	this.selectCategory = function(category) {
-		this.categories.forEach(cat=>{if (cat!==category) cat.__edit=false});
-		this.category = category;
-		this.item = undefined;
+	this.selectMG = function(mg) {
+		this.modifiersGroups.forEach(mg=>{if (mg!==this.modifiersGroup) mg.__edit=false});
+		this.modifiersGroup = mg;
+		this.modifier = undefined;
 	}
 
-	this.selectItem = function(item) {
-		this.item = item;
+	this.selectModifier = function(modifier) {
+		this.modifier = modifier;
 	}
 
-	this.itemChanged = function(item) {
+	this.modifierChanged = function(modifier) {
 		//TODO validate..
 		//TODO persist the change.
 	}
 
-	this.addCategory = function() {
-		this.selectCategory(categoriesService.addCategory());
+	this.addMG = function() {
+		this.selectMG(modifiersService.addModifiersGroup());
 	}
 
-	this.addItem = function() {
-		this.selectItem(categoriesService.addItem(this.category));
+	this.addModifier = function() {
+		this.selectModifier(modifiersService.addModifier(this.modifier));
 	}
 
-	this.deleteCategory = function(category) {
-		//TODO alert for confirmation
-		this.item = undefined;
-		this.category = undefined;
-		categoriesService.removeCategory(category);
-	}
+	// this.deleteCategory = function(category) {
+	// 	//TODO alert for confirmation
+	// 	this.item = undefined;
+	// 	this.category = undefined;
+	// 	categoriesService.removeCategory(category);
+	// }
 
-	this.deleteItem = function(item) {
-		//TODO alert for confirmation
-		this.item = undefined;
-		categoriesService.removeItem(this.category, item);
-	}
+	// this.deleteItem = function(item) {
+	// 	//TODO alert for confirmation
+	// 	this.item = undefined;
+	// 	categoriesService.removeItem(this.category, item);
+	// }
 
-	this.onCatDblClick = function(category){
+	this.onMgDblClick = function(mg){
 		//this.categories.forEach(cat=>cat.__edit=false);
-		category.__edit=true;
+		mg.__edit=true;
 	}
 }
 
-export default CategoriesController;
+export default ModifiersController;

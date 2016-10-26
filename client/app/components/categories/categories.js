@@ -12,11 +12,11 @@ let categoriesModule = angular.module('categories', [
 .config(($stateProvider, $urlRouterProvider) => {
   "ngInject";
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/items');
 
   $stateProvider
     .state('items', {
-      url: '/',
+      url: '/items',
       component: 'categories',
       resolve: {
       	categories: categoriesService => categoriesService.getCategories()

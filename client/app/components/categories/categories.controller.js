@@ -23,7 +23,7 @@ var CategoriesController = function(categoriesService) {
 	}		
 
 	this.selectCategory = function(category) {
-		this.categories.forEach(cat=>{if (cat!==category) cat.__edit=false});
+		this.categories.forEach(cat=>{if (cat!==this.category) cat.__edit=false});
 		this.category = category;
 		this.item = undefined;
 	}

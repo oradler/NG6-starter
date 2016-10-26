@@ -9,17 +9,15 @@ let modifiersModule = angular.module('modifiers', [
 
 .factory('modifiersService', modifiersService)
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config($stateProvider => {
   "ngInject";
-
-  $urlRouterProvider.otherwise('/');
 
   $stateProvider
     .state('modifiers', {
-      url: '/',
+      url: '/modifiers',
       component: 'modifiers',
       resolve: {
-      	modifiers: modifiersService => modifiersService.getModifiers()
+      	modifiersGroups: modifiersService => modifiersService.getModifiersGroups()
       }
     });
 })

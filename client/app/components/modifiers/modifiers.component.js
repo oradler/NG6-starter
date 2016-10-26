@@ -1,14 +1,14 @@
-import template from './categories.html';
-import controller from './categories.controller';
-import './categories.styl';
+import template from './modifiers.html';
+import controller from './modifiers.controller';
+import './modifiers.styl';
 
-let categoriesComponent = {
+let modifiersComponent = {
   restrict: 'E',
   bindings: {
-  	categories: '<'
+  	modifiersGroups: '<'
   },
   template,
   controller
 };
 
-export default categoriesComponent;
+export default modifiersComponent;

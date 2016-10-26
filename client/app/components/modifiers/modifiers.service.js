@@ -1,54 +1,52 @@
 var modifiersService = function ($q, DataService) {
 	"ngInject";
 
-	var modifierGroups;
+	var modifiersGroups;
 
 	return {
-		getModifierGroups: function(){
-			if (!categories) {
-				return DataService.getCategories()
-					.then(function(categories_){
-						categories = categories_;
+		getModifiersGroups: function(){
+			if (!modifiersGroups) {
+				return DataService.getModifiersGroups()
+					.then(function(mgs_){
+						modifiersGroups = mgs_;
 						//$q.resolve(categories)
-						return categories;
+						return modifiersGroups;
 					})
 			} else {
-				return $q.resolve(categories);				
+				return $q.resolve(modifiersGroups);				
 			}
 		},
-		addCategory: function(){
-			var newCategory = {
+		addModifiersGroup: function(){
+			var newMG = {
 				id: DataService.getGUID(),
-				name: "Unnamed Category",
-				items: []
+				maximum: 0,
+				minimum: 0,
+				name: "Unnamed Modifier Group",
+				required: false,
+				options: []
 			};
-			categories.push(newCategory);
-			return newCategory;
+			modifiersGroups.push(newMG);
+			return newMG;
 		},
-		addItem: function(category){
-			var newItem = {
+		addModifier: function(mg){
+			var newModifier = {
 				id: DataService.getGUID(),
-				in_stock: false,
-				modifier_groups_count: 0,
-				modifier_groups_id: [],
-				name: "Unnamed Item",
+				name: "Unnamed Modifier",
 				open: false,
-				price: 0,
-				price_levels: [
-				]				
+				price_per_unit: 0
 			};
-			category.items.push(newItem);
-			return newItem;
+			mg.modifiers.push(newModifier);
+			return newModifier;
 		},
-		removeCategory: function(category){
-			let catIdx = categories.indexOf(category);
-			categories.splice(catIdx, 1);
-		},
-		removeItem: function(category, item){
-			let itemIdx = category.items.indexOf(item);
-			category.items.splice(itemIdx, 1);
-		}
+		// removeCategory: function(category){
+		// 	let catIdx = categories.indexOf(category);
+		// 	categories.splice(catIdx, 1);
+		// },
+		// removeItem: function(category, item){
+		// 	let itemIdx = category.items.indexOf(item);
+		// 	category.items.splice(itemIdx, 1);
+		// }
 	}
 }
 
-export default categoriesService;
+export default modifiersService;
