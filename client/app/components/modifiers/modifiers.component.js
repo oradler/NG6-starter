@@ -5,7 +5,8 @@ import './modifiers.styl';
 let modifiersComponent = {
   restrict: 'E',
   bindings: {
-  	modifiersGroups: '<'
+  	modifiersGroups: '<',
+  	priceLevels: '<'
   },
   template,
   controller

@@ -278,7 +278,7 @@ var modifierGroups = {
                             "price_levels": [
                                 {
                                     "id": "rgTxpTRk",
-                                    "price": 0
+                                    "price": 1
                                 }
                             ],
                             "price_per_unit": 0

@@ -1,7 +1,7 @@
 var modifiersService = function ($q, DataService) {
 	"ngInject";
 
-	var modifiersGroups;
+	var modifiersGroups, priceLevels;
 
 	return {
 		getModifiersGroups: function(){
@@ -9,11 +9,21 @@ var modifiersService = function ($q, DataService) {
 				return DataService.getModifiersGroups()
 					.then(function(mgs_){
 						modifiersGroups = mgs_;
-						//$q.resolve(categories)
 						return modifiersGroups;
 					})
 			} else {
 				return $q.resolve(modifiersGroups);				
+			}
+		},
+		getPriceLevels: function() {
+			if (!priceLevels) {
+				return DataService.getModifiersPriceLevels()
+					.then(function(pls_){
+						priceLevels = pls_;
+						return priceLevels;
+					})
+			} else {
+				return $q.resolve(priceLevels);
 			}
 		},
 		addModifiersGroup: function(){
@@ -38,14 +48,14 @@ var modifiersService = function ($q, DataService) {
 			mg.modifiers.push(newModifier);
 			return newModifier;
 		},
-		// removeCategory: function(category){
-		// 	let catIdx = categories.indexOf(category);
-		// 	categories.splice(catIdx, 1);
-		// },
-		// removeItem: function(category, item){
-		// 	let itemIdx = category.items.indexOf(item);
-		// 	category.items.splice(itemIdx, 1);
-		// }
+		removeGroup: function(mg){
+			let mgIdx = modifiersGroups.indexOf(mg);
+			modifiersGroups.splice(mgIdx, 1);
+		},
+		removeModifier: function(mg, modifier){
+			let modifierIdx = mg.modifiers.indexOf(modifier);
+			mg.modifiers.splice(modifierIdx, 1);
+		}
 	}
 }
 

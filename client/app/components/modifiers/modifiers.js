@@ -17,7 +17,8 @@ let modifiersModule = angular.module('modifiers', [
       url: '/modifiers',
       component: 'modifiers',
       resolve: {
-      	modifiersGroups: modifiersService => modifiersService.getModifiersGroups()
+      	modifiersGroups: modifiersService => modifiersService.getModifiersGroups(),
+        priceLevels: modifiersService => modifiersService.getPriceLevels()
       }
     });
 })

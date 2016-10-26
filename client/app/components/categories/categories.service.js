@@ -3,7 +3,7 @@
 var categoriesService = function ($q, DataService) {
 	"ngInject";
 
-	var categories;
+	var categories, priceLevels;
 
 	return {
 		getCategories: function(){
@@ -16,6 +16,17 @@ var categoriesService = function ($q, DataService) {
 					})
 			} else {
 				return $q.resolve(categories);				
+			}
+		},
+		getPriceLevels: function() {
+			if (!priceLevels) {
+				return DataService.getItemsPriceLevels()
+					.then(function(pls_){
+						priceLevels = pls_;
+						return priceLevels;
+					})
+			} else {
+				return $q.resolve(priceLevels);
 			}
 		},
 		addCategory: function(){

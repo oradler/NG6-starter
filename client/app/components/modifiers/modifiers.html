@@ -110,6 +110,14 @@
 							    	<input type="number" ng-model="$ctrl.modifier.price_per_unit" class="form-control">
 								</div>
 							</div>
+
+							<div class="form-group">
+								<label for="" class="col-sm-2 control-label">Price Levels</label>
+							    <div class="col-sm-10">
+							    	<select class="form-control" multiple="true" ng-model="$ctrl.modifier.pls" ng-options="pl.price for pl in $ctrl.priceLevels"></select>
+								</div>
+							</div>
+
 						</div>
 
 						<div class="form-group">

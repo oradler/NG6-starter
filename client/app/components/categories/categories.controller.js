@@ -1,6 +1,6 @@
 // class CategoriesController {
 //   constructor() {
-//     //this.name = 'home';
+//     //ctrl.name = 'home';
 //   }
 // }
 
@@ -8,58 +8,56 @@
 var CategoriesController = function(categoriesService) {
 	"ngInject";
 
-	var ctrl = this;
+	var ctrl = this;		
 
-	this.$onChanges = function(changes) {
-		if (changes.categories) {
-			//debugger;
-			//this.categories = angular.copy(this.categories);
-		}
+	ctrl.selectCategory = function(category) {
+		ctrl.categories.forEach(cat=>{if (cat!==ctrl.category) cat.__edit=false});
+		ctrl.category = category;
+		ctrl.item = undefined;
 	}
 
-	this.$onInit = function() {
-		//this.name = 'categorieszzz';
-		// this.selectedCategory;		
-	}		
+	ctrl.selectItem = function(item) {
+		ctrl.item = item;
 
-	this.selectCategory = function(category) {
-		this.categories.forEach(cat=>{if (cat!==this.category) cat.__edit=false});
-		this.category = category;
-		this.item = undefined;
+		ctrl.item.pls = [];
+		ctrl.item.price_levels.forEach(function(price_level){
+			ctrl.priceLevels.some(function(pl_){
+				if (pl_.id===price_level.id) {
+					ctrl.item.pls.push(pl_);
+					return true;
+				}
+			});
+		})		
 	}
 
-	this.selectItem = function(item) {
-		this.item = item;
-	}
-
-	this.itemChanged = function(item) {
+	ctrl.itemChanged = function(item) {
 		//TODO validate..
 		//TODO persist the change.
 	}
 
-	this.addCategory = function() {
-		this.selectCategory(categoriesService.addCategory());
+	ctrl.addCategory = function() {
+		ctrl.selectCategory(categoriesService.addCategory());
 	}
 
-	this.addItem = function() {
-		this.selectItem(categoriesService.addItem(this.category));
+	ctrl.addItem = function() {
+		ctrl.selectItem(categoriesService.addItem(ctrl.category));
 	}
 
-	this.deleteCategory = function(category) {
+	ctrl.deleteCategory = function(category) {
 		//TODO alert for confirmation
-		this.item = undefined;
-		this.category = undefined;
+		ctrl.item = undefined;
+		ctrl.category = undefined;
 		categoriesService.removeCategory(category);
 	}
 
-	this.deleteItem = function(item) {
+	ctrl.deleteItem = function(item) {
 		//TODO alert for confirmation
-		this.item = undefined;
-		categoriesService.removeItem(this.category, item);
+		ctrl.item = undefined;
+		categoriesService.removeItem(ctrl.category, item);
 	}
 
-	this.onCatDblClick = function(category){
-		//this.categories.forEach(cat=>cat.__edit=false);
+	ctrl.onCatDblClick = function(category){
+		//ctrl.categories.forEach(cat=>cat.__edit=false);
 		category.__edit=true;
 	}
 }

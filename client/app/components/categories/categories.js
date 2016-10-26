@@ -19,7 +19,8 @@ let categoriesModule = angular.module('categories', [
       url: '/items',
       component: 'categories',
       resolve: {
-      	categories: categoriesService => categoriesService.getCategories()
+      	categories: categoriesService => categoriesService.getCategories(),
+        priceLevels: categoriesService => categoriesService.getPriceLevels()
       }
     });
 })

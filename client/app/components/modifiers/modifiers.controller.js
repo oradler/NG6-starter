@@ -3,65 +3,57 @@ var ModifiersController = function(modifiersService) {
 
 	var ctrl = this;
 
-	this.$onChanges = function(changes) {
-		// if (changes.categories) {
-			//debugger;
-			//this.categories = angular.copy(this.categories);
-		// }
+	ctrl.selectMG = function(mg) {
+		ctrl.modifiersGroups.forEach(mg=>{if (mg!==ctrl.modifiersGroup) mg.__edit=false});
+		ctrl.modifiersGroup = mg;
+		ctrl.modifier = undefined;
 	}
 
-	this.$onInit = function() {
-		//console.log(this.modifiersGroup);		
-		//this.name = 'categorieszzz';
-		// this.selectedCategory;		
-	}		
+	ctrl.selectModifier = function(modifier) {
+		ctrl.modifier = modifier;
 
-	this.selectMG = function(mg) {
-		this.modifiersGroups.forEach(mg=>{if (mg!==this.modifiersGroup) mg.__edit=false});
-		this.modifiersGroup = mg;
-		this.modifier = undefined;
+		ctrl.modifier.pls = [];
+		ctrl.modifier.price_levels.forEach(function(price_level){
+			ctrl.priceLevels.some(function(pl_){
+				if (pl_.id===price_level.id) {
+					ctrl.modifier.pls.push(pl_);
+					return true;
+				}
+			});
+		})
 	}
 
-	this.selectModifier = function(modifier) {
-		this.modifier = modifier;
+	ctrl.addMG = function() {
+		ctrl.selectMG(modifiersService.addModifiersGroup());
 	}
 
-	this.modifierChanged = function(modifier) {
-		//TODO validate..
-		//TODO persist the change.
+	ctrl.addModifier = function() {
+		ctrl.selectModifier(modifiersService.addModifier(ctrl.modifiersGroup));
 	}
 
-	this.addMG = function() {
-		this.selectMG(modifiersService.addModifiersGroup());
-	}
-
-	this.addModifier = function() {
-		this.selectModifier(modifiersService.addModifier(this.modifiersGroup));
-	}
-
-	this.adjustMaximum = function() {
-		if (!this.modifiersGroup.maximum<this.modifiersGroup.minimum) {
-			this.modifiersGroup.maximum = this.modifiersGroup.minimum;
+	ctrl.adjustMaximum = function() {
+		if (!ctrl.modifiersGroup.maximum<ctrl.modifiersGroup.minimum) {
+			ctrl.modifiersGroup.maximum = ctrl.modifiersGroup.minimum;
 		}
 	}
 
-	// this.deleteCategory = function(category) {
-	// 	//TODO alert for confirmation
-	// 	this.item = undefined;
-	// 	this.category = undefined;
-	// 	categoriesService.removeCategory(category);
-	// }
-
-	// this.deleteItem = function(item) {
-	// 	//TODO alert for confirmation
-	// 	this.item = undefined;
-	// 	categoriesService.removeItem(this.category, item);
-	// }
-
-	this.onMgDblClick = function(mg){
-		//this.categories.forEach(cat=>cat.__edit=false);
-		mg.__edit=true;
+	ctrl.deleteMG = function(mg) {
+		//TODO alert for confirmation
+		ctrl.modifier = undefined;
+		ctrl.modifiersGroup = undefined;
+		modifiersService.removeGroup(mg);
 	}
+
+	ctrl.deleteModifier = function(modifier) {
+		//TODO alert for confirmation
+		ctrl.modifier = undefined;
+		modifiersService.removeModifier(ctrl.modifiersGroup, modifier);
+	}
+
+	// ctrl.onMgDblClick = function(mg){
+	// 	//this.categories.forEach(cat=>cat.__edit=false);
+	// 	mg.__edit=true;
+	// }
 }
 
 export default ModifiersController;

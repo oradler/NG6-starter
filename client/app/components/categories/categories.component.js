@@ -5,7 +5,8 @@ import './categories.styl';
 let categoriesComponent = {
   restrict: 'E',
   bindings: {
-  	categories: '<'
+  	categories: '<',
+  	priceLevels: '<'
   },
   template,
   controller
