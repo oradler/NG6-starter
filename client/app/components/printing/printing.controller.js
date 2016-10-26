@@ -7,6 +7,9 @@ var PrintingController = function($timeout, printingService) {
 	}
 
 	this.$onInit = function() {
+		this.filters = {
+			name: ''
+		}
 	}		
 
 	this.onDropItem = function(event, data) {

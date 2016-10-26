@@ -7,21 +7,62 @@
 			</div>
 		</div>
 		<div class="row">
+
 			<div class="col-lg-6 itemsList">
 				<h4>Un-ordered Items</h4>
-				<div class="list-group" ui-on-Drop="$ctrl.onDropItem($event,$data)">
-					<a
-						ng-repeat="item in $ctrl.items" 
-						ui-draggable="true"
-						drag="item"
-						ng-hide="item.__hasPrintingOrder"
-						class="list-group-item">			            
-    					<h4 class="list-group-item-heading">{{item.name}}</h4>
-					</a>
-				</div>				
+				
+				<div class="row">
+					<div class="col-lg-12">
+						<h6></h6>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<form class="form-inline">
+						  <div class="form-group">
+						    <label for="">Name Filter</label>
+						    <input type="text" class="form-control" id="" placeholder="Enter serach text..." ng-model="$ctrl.filters.name">
+						  </div>
+						  <div class="checkbox">
+						    <label>
+						      <input type="checkbox" ng-model="$ctrl.filters.nameCS"> Case Sensitive
+						    </label>
+						  </div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-12">
+						<h6></h6>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="list-group" ui-on-Drop="$ctrl.onDropItem($event,$data)">
+							<a
+								ng-repeat="item in $ctrl.items | text:$ctrl.filters.name:'name':$ctrl.filters.nameCS" 
+								ui-draggable="true"
+								drag="item"
+								ng-hide="item.__hasPrintingOrder"
+								class="list-group-item">			            
+		    					<h4 class="list-group-item-heading">{{item.name}}</h4>
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
+
 			<div class="col-lg-6 orderList">
 				<h4>Ordered Items</h4>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<h6></h6>
+					</div>
+				</div>
+				
 				<div class="list-group" ui-on-Drop="$ctrl.onDropOrder($event,$data,'container')">
 					<a 
 						class="list-group-item" 

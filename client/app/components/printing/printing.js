@@ -12,6 +12,18 @@ let printingModule = angular.module('printing', [
 
 .factory('printingService', printingService)
 
+.filter('text', function() {
+  return function(items, text, itemProperty, isCaseSensitive) {
+    return items.filter(function(item) {
+      let findIn = itemProperty ? item[itemProperty] : item;
+      let text_ = isCaseSensitive ? text : text.toLowerCase();
+      let target_ = isCaseSensitive ? findIn.toString() : findIn.toString().toLowerCase();
+      //return target_.indexOf(text_) === 0;//for prefix search
+      return target_.indexOf(text_) > -1;
+    });
+  };
+})
+
 .config($stateProvider => {
   "ngInject";
 
