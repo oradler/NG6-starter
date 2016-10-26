@@ -23,7 +23,7 @@ var modifiersService = function ($q, DataService) {
 				minimum: 0,
 				name: "Unnamed Modifier Group",
 				required: false,
-				options: []
+				modifiers: []
 			};
 			modifiersGroups.push(newMG);
 			return newMG;

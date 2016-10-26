@@ -1,0 +1,32 @@
+.printing
+	.orderList
+		h4
+			padding 5px 0 5px 0
+			//border thin solid green
+		h4,h6
+			margin 0
+		h6
+			height 25px
+			//border thin solid red
+		.list-group
+			min-height 45px
+			border 1px solid #ddd
+
+		.list-group-item
+			padding 0
+			border none
+			.list-group-item-heading
+				maring 5px 0 5px 0
+			
+		.dropzone.on-drag-hover
+			animation-name dragHover
+			animation-duration 250ms
+			animation-iteration-count 1//infinite
+			// animation-direction alternate
+			animation-timing-function linear
+			animation-fill-mode forwards	
+
+@keyframes dragHover {
+    0%   {background-color: hsla(0, 4%, 23%, 0);}
+    100% {background-color: hsla(0, 4%, 23%, 1);}
+}

@@ -1,6 +1,6 @@
 var DataService = function($q) {
   "ngInject";
-  var categories, modifiersGroups;
+  var categories, modifiersGroups, items, printingOrder;
 
   function getGUID() {
     function s4() {return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);};
@@ -24,11 +24,12 @@ var DataService = function($q) {
       return $q.resolve(categories);
     },
     getModifiersGroups: function() {
+      if (!modifiers) {
+        var modifiers = JSON.parse(sessionStorage.getItem('modifiers'));                
+      }
       if (!modifiersGroups) {
         //ASSUMPTION: since the modifiers were supplied in the data package, I will use the "options" array as if it's an array of modifiers IDs only
-        var modifiers = JSON.parse(sessionStorage.getItem('modifiers'));        
         modifiersGroups = JSON.parse(sessionStorage.getItem('modifiersGroups'));
-      debugger;
         modifiersGroups.forEach(function(mg){
           mg.modifiers = mg.options.filter(function(modifierObj){          
             let exists = modifiers.some(modifier=>modifier.id===modifierObj.id);
@@ -37,6 +38,26 @@ var DataService = function($q) {
         });
       };
       return $q.resolve(modifiersGroups);
+    },
+    getItems: function() {
+      if (!items) {
+        if (!categories) {
+          categories = JSON.parse(sessionStorage.getItem('categories'));
+        }
+        items = [];      
+        categories.forEach(function(category){
+          category.items.forEach(function(item){
+            items.push(item);
+          })
+        })
+      }
+      return $q.resolve(items);      
+    },
+    getPrintingOrder: function() {
+      if (!printingOrder) {
+        printingOrder = [];        
+      }
+      return $q.resolve(printingOrder);      
     },
     getGUID: getGUID
   }

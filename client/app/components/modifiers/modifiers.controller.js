@@ -36,7 +36,13 @@ var ModifiersController = function(modifiersService) {
 	}
 
 	this.addModifier = function() {
-		this.selectModifier(modifiersService.addModifier(this.modifier));
+		this.selectModifier(modifiersService.addModifier(this.modifiersGroup));
+	}
+
+	this.adjustMaximum = function() {
+		if (!this.modifiersGroup.maximum<this.modifiersGroup.minimum) {
+			this.modifiersGroup.maximum = this.modifiersGroup.minimum;
+		}
 	}
 
 	// this.deleteCategory = function(category) {

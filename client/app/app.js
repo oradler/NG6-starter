@@ -1,5 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+//import ngDragDrop from 'ang-drag-drop';
 import Common from './common/common';
 import Components from './components/components';
 //import AppDataService from './app.data.service';
@@ -18,7 +19,7 @@ import AppComponent from './app.component';
 angular.module('app', [
     uiRouter,
     Common,
-    Components,
+    Components
   ])
   .config(($locationProvider) => {
     "ngInject";
