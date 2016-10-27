@@ -5,6 +5,7 @@ var printingService = function ($q, DataService) {
 
 	return {
 		getItems: function(){
+			debugger;
 			if (!items) {
 				return DataService.getItems()
 					.then(function(items_){

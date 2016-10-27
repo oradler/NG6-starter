@@ -4,7 +4,7 @@ var ModifiersController = function(modifiersService) {
 	var ctrl = this;
 
 	ctrl.selectMG = function(mg) {
-		ctrl.modifiersGroups.forEach(mg=>{if (mg!==ctrl.modifiersGroup) mg.__edit=false});
+		// ctrl.modifiersGroups.forEach(mg=>{if (mg!==ctrl.modifiersGroup) mg.__edit=false});
 		ctrl.modifiersGroup = mg;
 		ctrl.modifier = undefined;
 	}
@@ -31,8 +31,15 @@ var ModifiersController = function(modifiersService) {
 		ctrl.selectModifier(modifiersService.addModifier(ctrl.modifiersGroup));
 	}
 
-	ctrl.adjustMaximum = function() {
-		if (!ctrl.modifiersGroup.maximum<ctrl.modifiersGroup.minimum) {
+	ctrl.maxChange = function() {
+		if (ctrl.modifiersGroup.minimum > ctrl.modifiersGroup.maximum) {
+			ctrl.modifiersGroup.minimum = ctrl.modifiersGroup.maximum;
+		}
+	}
+
+	ctrl.minChange = function() {
+		if (ctrl.modifiersGroup.minimum < 0) ctrl.modifiersGroup.minimum = 0;
+		if (ctrl.modifiersGroup.maximum < ctrl.modifiersGroup.minimum) {
 			ctrl.modifiersGroup.maximum = ctrl.modifiersGroup.minimum;
 		}
 	}

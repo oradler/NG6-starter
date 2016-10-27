@@ -43,7 +43,8 @@ var modifiersService = function ($q, DataService) {
 				id: DataService.getGUID(),
 				name: "Unnamed Modifier",
 				open: false,
-				price_per_unit: 0
+				price_per_unit: 0,
+				price_levels: []
 			};
 			mg.modifiers.push(newModifier);
 			return newModifier;

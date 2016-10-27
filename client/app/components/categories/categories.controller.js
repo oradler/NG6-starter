@@ -11,7 +11,7 @@ var CategoriesController = function(categoriesService) {
 	var ctrl = this;		
 
 	ctrl.selectCategory = function(category) {
-		ctrl.categories.forEach(cat=>{if (cat!==ctrl.category) cat.__edit=false});
+		// ctrl.categories.forEach(cat=>{if (cat!==ctrl.category) cat.__edit=false});
 		ctrl.category = category;
 		ctrl.item = undefined;
 	}
@@ -30,10 +30,10 @@ var CategoriesController = function(categoriesService) {
 		})		
 	}
 
-	ctrl.itemChanged = function(item) {
+	// ctrl.itemChanged = function(item) {
 		//TODO validate..
 		//TODO persist the change.
-	}
+	// }
 
 	ctrl.addCategory = function() {
 		ctrl.selectCategory(categoriesService.addCategory());
@@ -56,10 +56,10 @@ var CategoriesController = function(categoriesService) {
 		categoriesService.removeItem(ctrl.category, item);
 	}
 
-	ctrl.onCatDblClick = function(category){
+	// ctrl.onCatDblClick = function(category){
 		//ctrl.categories.forEach(cat=>cat.__edit=false);
-		category.__edit=true;
-	}
+		// category.__edit=true;
+	// }
 }
 
 export default CategoriesController;

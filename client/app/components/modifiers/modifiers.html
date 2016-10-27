@@ -1,11 +1,13 @@
 <navbar></navbar>
 <main>
   	<div class="container-fluid">
+
 		<div class="row">
 			<div class="col-lg-12">
 				<h3>Groups <small>Choose Group to Edit</small></h3>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-lg-2">
 				<div class="list-group">
@@ -16,21 +18,20 @@
 						ng-click="$ctrl.selectMG(mg)"
 						ng-dblclick="$ctrl.onMgDblClick(mg)"						
 						style="cursor:pointer">			            
-    					<h4 class="list-group-item-heading" ng-hide="mg.__edit===true">{{mg.name}}</h4>
-    					<input type="text" class="form-control" id="" placeholder="Group Name" ng-show="mg.__edit===true" ng-model="mg.name" ng-blur="mg.__edit=false">
+    					<h4 class="list-group-item-heading">{{mg.name}}</h4>
 						<button type="button" style="position:absolute;right: 10px;bottom:10px;" class="btn btn-danger btn-xs" ng-click="$ctrl.deleteMG(mg)"><span class="glyphicon glyphicon-remove"></span></button>
 					</a>
-  					<a class="list-group-item" ng-click="$ctrl.addMG()" style="cursor:pointer;background:green;">
+  					<a class="list-group-item" ng-click="$ctrl.addMG()" style="cursor:pointer;background:#dbbc93;">
   						<span class="glyphicon glyphicon-plus"></span><span> Add</span>
 					</a>
 				</div>				
 			</div>
 
 			<div class="col-lg-10" ng-show="$ctrl.modifiersGroup">
+				<h4>Group Info</h4>
+				
 				<div class="row">
-					<div class="col-lg-6">
-						<h4>Group Info</h4>
-
+					<div class="col-sm-6">
 						<div class="form-horizontal">
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">Name</label>
@@ -44,14 +45,14 @@
 							    <div class="col-sm-4">
 					          		<div class="input-group input-group-md">
 				            			<span class="input-group-addon">Minimum</span>
-								  		<input type="number" ng-model="$ctrl.modifiersGroup.minimum" class="form-control" ng-change="$ctrl.adjustMaximum()">
+								  		<input type="number" ng-model="$ctrl.modifiersGroup.minimum" class="form-control" ng-change="$ctrl.minChange()">
 							  		</div>	
 								</div>
 								<div class="col-sm-2"></div>
 							    <div class="col-sm-4">
 					          		<div class="input-group input-group-md">
 				            			<span class="input-group-addon">Maximum</span>
-								  		<input type="number" ng-model="$ctrl.modifiersGroup.maximum" class="form-control">
+								  		<input type="number" ng-model="$ctrl.modifiersGroup.maximum" class="form-control" ng-change="$ctrl.maxChange()">
 							  		</div>	
 								</div>								
 							</div>
@@ -66,75 +67,82 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
 
-						<h4>Group Modifiers <small>Choose Modifier to Edit</small></h4>
+				<div class="row">
+					
+					<div class="col-lg-12">
+						<h4>Modifiers <small>Choose Modifier to Edit</small></h4>
 
 						<div class="row">
-							<div class="col-lg-2">								
+							<div class="col-lg-6">
+								<div class="row">
+									<div class="col-lg-2">								
+									</div>
+									
+									<div class="col-lg-10">
+										<div class="list-group">
+											<a
+												ng-repeat="modifier in $ctrl.modifiersGroup.modifiers" 
+												class="list-group-item" 
+												ng-class="{active: $ctrl.modifier===modifier}"
+												ng-click="$ctrl.selectModifier(modifier)"
+												style="cursor:pointer"
+												>			            
+						    					<h4 class="list-group-item-heading">{{modifier.name}}</h4>
+												<button type="button" style="position:absolute;right: 10px;bottom:10px;" class="btn btn-danger btn-xs" ng-click="$ctrl.deleteModifier(modifier)"><span class="glyphicon glyphicon-remove"></span></button>    				
+						  					</a>
+							  				<a class="list-group-item" ng-click="$ctrl.addModifier()" style="cursor:pointer;background:#dbbc93;" ng-hide="!$ctrl.modifiersGroup">
+							  					<span class="glyphicon glyphicon-plus"></span><span> Add</span>
+											</a>					  				
+										</div>				
+									</div>
+								</div>							
 							</div>
-							
-							<div class="col-lg-10">
-								<div class="list-group">
-									<a
-										ng-repeat="modifier in $ctrl.modifiersGroup.modifiers" 
-										class="list-group-item" 
-										ng-class="{active: $ctrl.modifier===modifier}"
-										ng-click="$ctrl.selectModifier(modifier)"
-										style="cursor:pointer"
-										>			            
-				    					<h4 class="list-group-item-heading">{{modifier.name}}</h4>
-										<button type="button" style="position:absolute;right: 10px;bottom:10px;" class="btn btn-danger btn-xs" ng-click="$ctrl.deleteModifier(modifier)"><span class="glyphicon glyphicon-remove"></span></button>    				
-				  					</a>
-					  				<a class="list-group-item" ng-click="$ctrl.addModifier()" style="cursor:pointer;background:green;" ng-hide="!$ctrl.modifiersGroup">
-					  					<span class="glyphicon glyphicon-plus"></span><span> Add</span>
-									</a>					  				
-								</div>				
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-6" ng-show="$ctrl.modifier">
-						<h4>Modifier Info</h4>
-						
-						<div class="form-horizontal">
-							<div class="form-group">
-								<label for="" class="col-sm-2 control-label">Name</label>
-							    <div class="col-sm-10">
-							    	<input type="text" ng-model="$ctrl.modifier.name" class="form-control" placeholder="Modifier Name...">
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="" class="col-sm-2 control-label">Price Per Unit</label>
-							    <div class="col-sm-10">
-							    	<input type="number" ng-model="$ctrl.modifier.price_per_unit" class="form-control">
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="" class="col-sm-2 control-label">Price Levels</label>
-							    <div class="col-sm-10">
-							    	<select class="form-control" multiple="true" ng-model="$ctrl.modifier.pls" ng-options="pl.price for pl in $ctrl.priceLevels"></select>
-								</div>
-							</div>
-
-						</div>
-
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<div class="checkbox">
-								  <label>
-								    <input type="checkbox" ng-model="$ctrl.modifiers.open"> Open
-								  </label>
-								</div>
-							</div>
-						</div>
+							<div class="col-lg-6" ng-show="$ctrl.modifier">
+								<h4>Modifier Info</h4>
 								
-				  					    	
-					</div>
-				</div>				
-			</div>	
+								<div class="form-horizontal">
+									<div class="form-group">
+										<label for="" class="col-sm-2 control-label">Name</label>
+									    <div class="col-sm-10">
+									    	<input type="text" ng-model="$ctrl.modifier.name" class="form-control" placeholder="Modifier Name...">
+										</div>
+									</div>
 
-    	</div>
+									<div class="form-group">
+										<label for="" class="col-sm-2 control-label">Price Per Unit</label>
+									    <div class="col-sm-10">
+									    	<input type="number" ng-model="$ctrl.modifier.price_per_unit" class="form-control">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="" class="col-sm-2 control-label">Price Levels</label>
+									    <div class="col-sm-10">
+									    	<select class="form-control" multiple="true" ng-model="$ctrl.modifier.pls" ng-options="pl.price for pl in $ctrl.priceLevels"></select>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<div class="checkbox">
+										  <label>
+										    <input type="checkbox" ng-model="$ctrl.modifiers.open"> Open
+										  </label>
+										</div>
+									</div>
+								</div>													  					   
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>				
+		</div>	
+
   	</div>
 </main>
