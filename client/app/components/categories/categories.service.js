@@ -51,6 +51,10 @@ var categoriesService = function ($q, DataService) {
 				]				
 			};
 			category.items.push(newItem);
+			DataService.getItems()
+				.then(function(items){
+					debugger;
+				})
 			return newItem;
 		},
 		removeCategory: function(category){

@@ -33,24 +33,19 @@ var PrintingController = function($timeout, printingService) {
 			//if item is allready in the printingOrder list, it's an in-list re-ordering, remove the current instance from the array:
 			ctrl.printingOrder.some(function(item_, idx){
 				if (item_.id===data.id) {
-					//item = item_;
-					//inlist = true;
 					ctrl.printingOrder.splice(idx, 1);
 					return true;
 				}
 			})
 
-			//if(!inlist) {
-				ctrl.items.some(function(item_){
-					if (item_.id===data.id) {
-						item = item_;
-						return true;
-					}
-				})				
-				item.__hasPrintingOrder = true;
-			//}
+			ctrl.items.some(function(item_){
+				if (item_.id===data.id) {
+					item = item_;
+					return true;
+				}
+			})				
+			item.__hasPrintingOrder = true;
 			
-
 			if (target==='container') {
 				ctrl.printingOrder.push(item);				
 			} else if (target==='first') {
@@ -64,8 +59,6 @@ var PrintingController = function($timeout, printingService) {
 				});		
 			}
 
-			//console.log(ctrl.items);
-			//console.log(ctrl.printingOrder);
 		});
 	}
 }

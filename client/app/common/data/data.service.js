@@ -52,6 +52,7 @@ var DataService = function($q) {
       return $q.resolve(priceLevels);
     },
     getItems: function() {
+      debugger;
       if (!categories) {
         categories = JSON.parse(sessionStorage.getItem('categories'));
       }
@@ -83,12 +84,6 @@ var DataService = function($q) {
       }
       return $q.resolve(printingOrder);      
     },
-    // getPriceLevels: function() {
-    //   if (!priceLevels) {
-    //     priceLevels = [];
-    //   }
-    //   return $q.resolve(priceLevels);
-    // }
     getGUID: getGUID
   }
 }

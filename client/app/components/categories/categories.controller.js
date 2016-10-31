@@ -1,17 +1,9 @@
-// class CategoriesController {
-//   constructor() {
-//     //ctrl.name = 'home';
-//   }
-// }
-
-
 var CategoriesController = function(categoriesService) {
 	"ngInject";
 
 	var ctrl = this;		
 
 	ctrl.selectCategory = function(category) {
-		// ctrl.categories.forEach(cat=>{if (cat!==ctrl.category) cat.__edit=false});
 		ctrl.category = category;
 		ctrl.item = undefined;
 	}
@@ -29,11 +21,6 @@ var CategoriesController = function(categoriesService) {
 			});
 		})		
 	}
-
-	// ctrl.itemChanged = function(item) {
-		//TODO validate..
-		//TODO persist the change.
-	// }
 
 	ctrl.addCategory = function() {
 		ctrl.selectCategory(categoriesService.addCategory());
